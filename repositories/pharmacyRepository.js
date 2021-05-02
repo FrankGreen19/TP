@@ -3,14 +3,17 @@ const { connection } = require('../config')
 
 const pool = new Pool(connection);
 const queryStrings = {
-    selectAll: `SELECT patient.*, medicine.*, pharmacy.*            
-                FROM "pharmacy" 
-                JOIN "patient" ON "id_patient" = "patient"."id"
-                JOIN "medicine" ON "id_medicine" = "medicine"."id"
-                ORDER BY pharmacy.id`,
-    select: `SELECT "id", "id_patient", "id_medicine"
-                FROM "pharmacy"  
-            WHERE "id" = $1`,
+    selectAll: `SELECT m.*, p.*, pharmacy.id,
+                    (SELECT name FROM medicine WHERE medicine.id = m.id_same_medicine) as same_medicine
+                FROM pharmacy
+                JOIN medicine m on pharmacy.id_medicine = m.id
+                JOIN patient p on pharmacy.id_patient = p.id`,
+    select: `SELECT m.*, p.*, pharmacy.id,
+                    (SELECT name FROM medicine WHERE medicine.id = m.id_same_medicine) as same_medicine
+             FROM pharmacy
+            JOIN medicine m on pharmacy.id_medicine = m.id
+            JOIN patient p on pharmacy.id_patient = p.id   
+            WHERE pharmacy.id = $1`,
     insert: `INSERT INTO "pharmacy"("id_patient", "id_medicine") 
             VALUES ($1, $2) 
             RETURNING "id", "id_patient", "id_medicine"`,
