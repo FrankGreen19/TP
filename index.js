@@ -1,4 +1,5 @@
 const express = require('express');
+const passport = require('passport')
 const { port } = require('./config');
 
 const app = express();
@@ -17,5 +18,8 @@ app.use('/medicine', medicineRouter);
 app.use('/patient', patientRouter);
 app.use('/pharmacy', pharmacyRouter);
 app.use('/auth', authRouter);
+
+app.use(passport.initialize());
+require('./middleware/passport')(passport);
 
 app.listen(port, () => console.log(`App listening on http://localhost:${port}!`));
