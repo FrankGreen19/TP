@@ -17,6 +17,8 @@ patientRouter.route('/')
                 lastname: req.body.lastname,
                 firstname: req.body.firstname,
                 patronymic: req.body.patronymic,
+                login: req.body.login,
+                password: req.body.password
             };
             res.send(await patientRepository.post(rssItem));
         } catch (err) {
@@ -24,6 +26,7 @@ patientRouter.route('/')
             res.status(500).send();
         }
     });
+
 patientRouter.route('/:id')
     .get(async function(req, res) {
         try {
@@ -41,6 +44,8 @@ patientRouter.route('/:id')
                 lastname: req.body.lastname,
                 firstname: req.body.firstname,
                 patronymic: req.body.patronymic,
+                login: req.body.login,
+                password: req.body.password
             };
             res.send(await patientRepository.put(id, rssItem));
         } catch (err) {
