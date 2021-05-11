@@ -27,6 +27,6 @@ app.use(passport.initialize());
 require('./middleware/passport')(passport); //passport for jwt
 
 app.use(multer({storage: fileRouter.storageConfig,fileFilter: fileRouter.fileFilter}).single("filedata")); //multer image uploading
-app.use("/upload", imageRouter);
+app.use("/image", imageRouter);
 
 app.listen(port, () => console.log(`App listening on http://localhost:${port}!`));

@@ -1,7 +1,23 @@
 const multer  = require("multer");
+const fs = require('fs');
 const Router = require('express').Router;
 
 const imageRouter = Router();
+
+imageRouter.route('/:path')
+    .get(async function (req, res) {
+        const path = "./uploads/" + req.params.path;
+        fs.access(path, fs.constants.R_OK, err => {
+            if(err){
+                res.status(404).json({
+                    message: "Изображение не найдено"
+                });
+            }
+            else{
+                fs.createReadStream(path).pipe(res);
+            }
+        });
+    });
 
 imageRouter.route('/')
     .post(async function (req, res) {
@@ -16,7 +32,6 @@ imageRouter.route('/')
             });
         }
     });
-
 
 const storageConfig = multer.diskStorage({
     destination: (req, file, cb) =>{
