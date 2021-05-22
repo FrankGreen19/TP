@@ -1,12 +1,14 @@
 const express = require('express');
 const passport = require('passport');
 const multer  = require("multer");
+const cors = require('cors');
 
 const { port } = require('./config');
 const fileRouter = require('./routers/fileRouter');
 
 const app = express();
 app.use(express.json());
+app.use(cors());
 
 const doctorRouter = require('./routers/doctorRouter');
 const scheduleRouter = require('./routers/scheduleRouter');
