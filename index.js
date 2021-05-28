@@ -16,6 +16,7 @@ const medicineRouter = require('./routers/medicineRouter');
 const patientRouter = require('./routers/patientRouter');
 const pharmacyRouter = require('./routers/pharmacyRouter');
 const authRouter = require('./routers/authRouter');
+const recordRouter = require('./routers/recordRouter');
 const imageRouter = fileRouter.imageRouter;
 
 app.use('/doctor', doctorRouter);
@@ -23,6 +24,7 @@ app.use('/schedule', scheduleRouter);
 app.use('/medicine', medicineRouter);
 app.use('/patient', patientRouter);
 app.use('/pharmacy', pharmacyRouter);
+app.use('/record', recordRouter);
 app.use('/auth', authRouter);
 
 app.use(passport.initialize());
