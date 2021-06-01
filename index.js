@@ -18,6 +18,8 @@ const pharmacyRouter = require('./routers/pharmacyRouter');
 const authRouter = require('./routers/authRouter');
 const recordRouter = require('./routers/recordRouter');
 const medicalStoryRouter = require('./routers/medicalStoryRouter');
+const analysisRouter  = require('./routers/analysisRouter');
+const medicalstorymedicineRouter = require('./routers/medicalStoryMedicineRouter');
 const imageRouter = fileRouter.imageRouter;
 
 app.use('/doctor', doctorRouter);
@@ -28,6 +30,9 @@ app.use('/pharmacy', pharmacyRouter);
 app.use('/record', recordRouter);
 app.use('/medical_story', medicalStoryRouter);
 app.use('/auth', authRouter);
+app.use('/analysis', analysisRouter);
+app.use('/medical_story_medicine', medicalstorymedicineRouter);
+
 
 app.use(passport.initialize());
 require('./middleware/passport')(passport); //passport for jwt
