@@ -4,7 +4,7 @@ const patientRepository = require('../repositories/patientRepository')
 
 const patientRouter = Router();
 patientRouter.route('/')
-    .get(passport.authenticate('jwt', {session: false}), async function(req, res) {
+    .get( async function(req, res) { //passport.authenticate('jwt', {session: false}),
         try {
             res.send(await patientRepository.getAll());
         } catch (err) {
