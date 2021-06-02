@@ -29,7 +29,7 @@ patientRouter.route('/')
     });
 
 patientRouter.route('/:id')
-    .get(passport.authenticate('jwt', {session: false}), async function(req, res) {
+    .get(async function(req, res) {
         try {
             const id = parseInt(req.params.id);
             res.send(await patientRepository.get(id));
@@ -38,7 +38,7 @@ patientRouter.route('/:id')
             res.status(500).send();
         }
     })
-    .put(passport.authenticate('jwt', {session: false}), async function (req, res){
+    .put(async function (req, res){
         try {
             const id = parseInt(req.params.id);
             const rssItem = {
@@ -54,7 +54,7 @@ patientRouter.route('/:id')
             res.status(500).send();
         }
     })
-    .delete(passport.authenticate('jwt', {session: false}), async function (req, res){
+    .delete(async function (req, res){
         try {
             const id = parseInt(req.params.id);
             res.send(await patientRepository.remove(id));
